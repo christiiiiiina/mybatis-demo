@@ -14,22 +14,22 @@
             resultType：指定查询返回的结果集的类型，如果是集合，则必须是泛型
             parameterType：如果有参数，则通过它来指定参数的类型
     -->
-    <select id="getAll" resultType="org.example.pojo.Student">
+    <select id="getAll" resultType="student">
         select id,name,email,age from student
     </select>
 
     <!--按主键id查询-->
-    <select id="getById" parameterType="int" resultType="org.example.pojo.Student">
+    <select id="getById" parameterType="int" resultType="student">
         select id,name,email,age from student where id = #{id}
     </select>
 
     <!--按学生名称模糊查询-->
-    <select id="getByName" parameterType="string" resultType="org.example.pojo.Student">
+    <select id="getByName" parameterType="string" resultType="student">
         select id,name,email,age from student where name like '%${name}%'
     </select>
 
     <!--增加学生-->
-    <insert id="insert" parameterType="org.example.pojo.Student">
+    <insert id="insert" parameterType="student">
         insert into student (name,email,age) values (#{name},#{email},#{age})
     </insert>
 
@@ -39,7 +39,7 @@
     </delete>
 
     <!--更新学生-->
-    <update id="update" parameterType="org.example.pojo.Student">
+    <update id="update" parameterType="student">
         update student set name = #{name}, email = #{email}, age = #{age} where id = #{id}
     </update>
 </mapper>

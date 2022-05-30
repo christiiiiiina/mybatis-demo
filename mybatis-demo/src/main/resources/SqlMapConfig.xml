@@ -10,6 +10,19 @@
     -->
     <properties resource="jdbc.properties"/>
 
+    <!--设置日志输出底层执行的代码-->
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <!--注册实体类的别名-->
+    <typeAliases>
+        <!--单个实体类别名注册-->
+<!--        <typeAlias type="org.example.pojo.Student" alias="student"/>-->
+        <!--批量注册别名，别名是类名的驼峰命名法（规范）-->
+        <package name="org.example.pojo"/>
+    </typeAliases>
+
     <!--配置数据库的环境变量（数据库连接配置）
         default：使用下面的environment标签的id属性进行指定配置
     -->
