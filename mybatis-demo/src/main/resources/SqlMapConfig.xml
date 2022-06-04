@@ -62,6 +62,8 @@
         class：动态代理方式下的注册
     -->
     <mappers>
-        <mapper resource="StudentMapper.xml"/>
+<!--        <mapper resource="StudentMapper.xml"/>-->
+        <!--批量注册-->
+        <package name="org.example.mapper"/>
     </mappers>
 </configuration>
