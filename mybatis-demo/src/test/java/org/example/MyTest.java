@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -132,11 +133,69 @@ public class MyTest {
     }
 
     @Test
-    public void testUsersDelete() throws ParseException {
+    public void testUsersDelete() {
 //        就是在调用接口中的方法，mybatis框架已经为我们把功能代理出来了
         int sum = uMapper.delete(8);
         System.out.println(sum);
 //        切记：在所有增删改后必须手工提交事务！！
+        sqlSession.commit();
+    }
+
+    @Test
+    public void testGetByCondition() throws ParseException {
+//        就是在调用接口中的方法，mybatis框架已经为我们把功能代理出来了
+        Users users = new Users();
+        users.setSex("1");
+        users.setUserName("小");
+        users.setAddress("市");
+        users.setBirthday(sf.parse("2002-01-19"));
+        List<Users> list = uMapper.getByCondition(users);
+        list.forEach(System.out::println);
+    }
+
+    @Test
+    public void testUsersUpdateSet() {
+//        就是在调用接口中的方法，mybatis框架已经为我们把功能代理出来了
+        Users users = new Users();
+        users.setId(7);
+        users.setUserName("王五六");
+        int sum = uMapper.updateBySet(users);
+        System.out.println(sum);
+//        切记：在所有增删改后必须手工提交事务！！
+        sqlSession.commit();
+    }
+
+    @Test
+    public void testUsersGetByIds() {
+//        就是在调用接口中的方法，mybatis框架已经为我们把功能代理出来了
+        Integer[] arr = {2, 4, 6};
+        List<Users> list = uMapper.getByIds(arr);
+        list.forEach(System.out::println);
+    }
+
+    @Test
+    public void testUsersDeleteBatch() {
+//        就是在调用接口中的方法，mybatis框架已经为我们把功能代理出来了
+        Integer[] arr = {9, 10, 11};
+        int sum = uMapper.deleteBatch(arr);
+        System.out.println(sum);
+        sqlSession.commit();
+    }
+
+    @Test
+    public void testUsersInsertBatch() throws ParseException {
+//        就是在调用接口中的方法，mybatis框架已经为我们把功能代理出来了
+        Users u1 = new Users("aa", sf.parse("2002-05-05"), "2", "岳阳a");
+        Users u2 = new Users("bb", sf.parse("2002-05-05"), "2", "岳阳b");
+        Users u3 = new Users("cc", sf.parse("2002-05-05"), "2", "岳阳c");
+        Users u4 = new Users("dd", sf.parse("2002-05-05"), "2", "岳阳d");
+        List<Users> list = new ArrayList<>();
+        list.add(u1);
+        list.add(u2);
+        list.add(u3);
+        list.add(u4);
+        int sum = uMapper.insertBatch(list);
+        System.out.println(sum);
         sqlSession.commit();
     }
 

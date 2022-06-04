@@ -50,4 +50,39 @@ public interface UsersMapper {
      * @return
      */
     int delete(int id);
+
+    /**
+     * 按指定条件进行多条件查询
+     * @param users
+     * @return
+     */
+    List<Users> getByCondition(Users users);
+
+    /**
+     * 有选择的更新
+     * @param users
+     * @return
+     */
+    int updateBySet(Users users);
+
+    /**
+     * 查询多个指定id的用户信息
+     * @param arr
+     * @return
+     */
+    List<Users> getByIds(Integer[] arr);
+
+    /**
+     * 批量删除
+     * @param arr
+     * @return
+     */
+    int deleteBatch(Integer[] arr);
+
+    /**
+     * 批量新增
+     * @param list
+     * @return
+     */
+    int insertBatch(List<Users> list);
 }
