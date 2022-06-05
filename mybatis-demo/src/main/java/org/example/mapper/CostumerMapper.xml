@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.CostumerMapper">
+    <resultMap id="costumerMap" type="org.example.pojo.Costumer">
+        <!--主键绑定-->
+        <id property="id" column="cid"/>
+        <!--非主键绑定-->
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <!--多出来的一咕噜绑定ordersList-->
+        <collection property="ordersList" ofType="orders">
+            <!--主键绑定-->
+            <id property="id" column="oid"/>
+            <!--非主键绑定-->
+            <result property="orderNumber" column="order_number"/>
+            <result property="orderPrice" column="order_price"/>
+        </collection>
+    </resultMap>
+
+    <select id="getById" parameterType="org.example.pojo.Costumer" resultMap="costumerMap">
+        select c.id cid,name,age,o.id oid,order_number,order_price,costumer_id
+        from costumer c left join orders o on c.id = o.costumer_id
+        where c.id = #{id}
+    </select>
+</mapper>
